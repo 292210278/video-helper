@@ -1,0 +1,101 @@
+@import "slider";
+@import "user-movies";
+@import "recent-watched";
+@import "modal";
+@import "movie-form";
+@import "selected-dir";
+@import "video";
+@import "sidebar";
+@import "video-detail";
+@import "header";
+@import "gallery";
+@import "menus";
+@import "search";
+@import "spinner";
+@import "not-found";
+:root {
+  --background-color: #171717;
+  --background-color-second: #2e2e2e;
+  --second-color: #f7f7f7;
+  --second-color-deep: #dedede;
+  --primary-color: #1bd806;
+}
+
+@font-face {
+  font-family: "loaderFont";
+  src: url("../assets/fonts/PingFangZhangYaLingHeiFangTi-2.ttf");
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+ul {
+  list-style: none;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--second-color);
+}
+
+.icon {
+  font-size: 2.4rem;
+
+  cursor: pointer;
+}
+
+.mr {
+  margin-right: 0.8rem;
+}
+
+.error-message {
+  color: red;
+}
+
+.page-loader {
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  color: wheat;
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide-in {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: var(--primary-color);
+  z-index: 1000;
+  transform-origin: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-animate {
+  width: 100%;
+  height: 100vh;
+
+  transform-origin: bottom;
+}
+
+.loader-text {
+  text-align: center;
+  font-family: loaderFont;
+  font-size: 20rem;
+}

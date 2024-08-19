@@ -1,0 +1,75 @@
+.container {
+  position: relative;
+  width: 50rem;
+  height: 30rem;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, 50%);
+  margin-bottom: 1rem;
+  z-index: 0;
+  margin-bottom: 16rem;
+}
+
+.poker {
+  position: absolute;
+  width: 25rem;
+  height: 31rem;
+  border: 0.15rem solid #fff;
+  border-radius: 1.5rem;
+  background-color: #17f700;
+  cursor: pointer;
+  transform-origin: bottom left;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  top: 0;
+  z-index: 0;
+}
+
+.poker:hover {
+  top: -10%;
+}
+
+.poker img {
+  position: relative;
+  width: 100%;
+}
+
+.poker1 {
+  transform: rotate(-10deg);
+}
+
+.poker2 {
+  transform: rotate(-6deg) translate(35%, -12%);
+}
+
+.poker3 {
+  transform: rotate(-2deg) translate(65%, -19%);
+}
+
+.poker4 {
+  transform: rotate(2deg) translate(95%, -26%);
+}
+
+.poker5 {
+  transform: rotate(6deg) translate(125%, -23%);
+}
+
+.poker_top {
+  background-color: #fff;
+  transition: 0.3s ease;
+  cursor: pointer;
+  z-index: 4;
+  position: absolute;
+  width: 25rem;
+  height: 31rem;
+  border: 0.15rem solid #fff;
+  border-radius: 1.5rem;
+  background-color: #17f700;
+  cursor: pointer;
+  transform-origin: bottom left;
+  overflow: hidden;
+}
+
+.poker_top:hover {
+  background-color: #aaa;
+}

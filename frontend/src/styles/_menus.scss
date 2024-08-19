@@ -1,0 +1,52 @@
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.styled-toggle {
+  position: relative;
+  left: 90%;
+  top: 87%;
+  background: none;
+  font-size: 2.6rem;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.styled-list {
+  position: fixed;
+  width: 8.6rem;
+  height: 10rem;
+  left: 50%;
+  top: 50%;
+  background-color: var(--second-color);
+
+  border-radius: 8px;
+}
+
+.styled-button {
+  width: 100%;
+  height: 3.2rem;
+  text-align: left;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  padding: 0 0.8rem;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--background-color-second);
+  }
+
+  & svg {
+    width: 1.6rem;
+    height: 1.6rem;
+    color: var(--color-grey-400);
+    transition: all 0.3s;
+  }
+}

@@ -1,0 +1,78 @@
+.selected-dir-container {
+  color: var(--primary-color);
+  width: 48rem;
+  height: 56rem;
+  border-radius: 16px;
+  padding: 2.4rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.selected-dir-box {
+  height: 48rem;
+  overflow-y: scroll;
+}
+
+.selected-dir {
+  padding: 0.8rem;
+  border-radius: 8px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 1.6rem;
+  transition: all 0.3s;
+}
+
+.selected-dir:hover {
+  background-color: var(--background-color);
+  color: var(--second-color);
+}
+
+.selected-handle {
+  display: flex;
+  height: 8rem;
+
+  align-items: center;
+}
+
+.selected-path {
+  align-content: center;
+
+  width: 45rem;
+  height: 3.2rem;
+  border-radius: 8px;
+  padding: 0 0.8rem;
+  font-size: 1.6rem;
+  background-color: var(--background-color);
+  color: var(--second-color);
+}
+
+.selected-pre {
+  margin-left: auto;
+  margin-right: 0.8rem;
+}
+
+.selected-btn {
+  cursor: pointer;
+  background-color: var(--second-color);
+  border: none;
+  outline: none;
+  font-weight: 700;
+  border-radius: 8px;
+  width: 3.3rem;
+  height: 3.3rem;
+  transition: all 0.3s;
+}
+
+.selected-btn:hover {
+  background-color: var(--background-color);
+  color: var(--second-color);
+}
+
+.selected-dir-input {
+  height: 3.2rem;
+  padding: 0 0.4rem;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+}
