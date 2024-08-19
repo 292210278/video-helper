@@ -11,6 +11,7 @@ import { BiCog } from "react-icons/bi";
 import Modal from "./Modal";
 import ConfigForm from "./ConfigForm";
 import ConfigContext from "../contexts/ConfigContext";
+import { SlArrowLeft } from "react-icons/sl";
 
 function Header({ children }) {
   const [opacity, setOpacity] = useState(false);
@@ -55,7 +56,7 @@ function Header({ children }) {
             className="icon mr"
             onClick={() => setOpacity(true)}
           />
-          <span onClick={() => navigate(-1)}>上一页</span>
+          <SlArrowLeft onClick={() => navigate(-1)} />
           <Modal>
             <Modal.Open opens="config">
               <BiCog className="icon mr" />
