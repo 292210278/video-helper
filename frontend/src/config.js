@@ -4,6 +4,6 @@ export const OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization: "Bearer 请替换成 TMDB 的 API-KEY",
+    Authorization: `Bearer ${import.meta.env.VITE_TMDB_KEY}`,
   },
 };
