@@ -11,6 +11,7 @@ import { Toaster } from "react-hot-toast";
 import NotFound from "./pages/NotFound";
 import { ConfigProvider } from "./contexts/ConfigContext";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import VideoPlay from "./pages/VideoPlay";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,6 +35,7 @@ function App() {
                   <Route path="video-detail" element={<VideoDetail />} />
                   <Route path="gallery" element={<Gallery />} />
                   <Route path="*" element={<NotFound />} />
+                  <Route path="video-play" element={<VideoPlay />} />
                 </Routes>
               </AnimatePresence>
             </Header>

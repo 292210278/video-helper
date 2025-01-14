@@ -50,6 +50,7 @@ function getSliderPoster(dirsItem) {
 
 const PokerSlider = () => {
   const { dirs } = useContext(SearchContext);
+
   const [names, setNames] = useState(
     getSliderPoster(dirs) ? getSliderPoster(dirs) : []
   );
