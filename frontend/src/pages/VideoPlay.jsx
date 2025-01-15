@@ -28,10 +28,16 @@ function VideoPlay() {
         wasmUrl: "/subtitles-octopus-worker.wasm",
         fallbackFont: "/font.ttf",
       };
+      playerRef.current.ready(() => {
+        if (!playerRef.current.controlBar.getChild("PlaybackRateMenuButton")) {
+          playerRef.current.controlBar.addChild("PlaybackRateMenuButton");
+        }
+        playerRef.current.playbackRate(1);
 
-      subtitlesRef.current = new SubtitlesOctopus(options);
+        playerRef.current.playbackRates([0.5, 1, 1.5, 2, 2.5, 3]);
+        subtitlesRef.current = new SubtitlesOctopus(options);
+      });
     }
-
     return () => {};
   }, []);
 
