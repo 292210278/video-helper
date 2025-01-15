@@ -1,11 +1,31 @@
 import "video.js/dist/video-js.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import videojs from "video.js";
 import SubtitlesOctopus from "libass-wasm";
 function VideoPlay() {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
   const subtitlesRef = useRef(null);
+
+  const canvasRef = useRef(null);
+  const [screenshot, setScreenshot] = useState(null);
+
+  const handleScreenshot = () => {
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+
+    if (video && canvas) {
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      const dataURL = canvas.toDataURL("image/png");
+      setScreenshot(dataURL);
+    }
+  };
   useEffect(() => {
     const videoElement = videoRef.current;
     if (videoRef.current) {
@@ -57,6 +77,23 @@ function VideoPlay() {
         />
         您的浏览器不支持 HLS 视频播放。
       </video>
+      <button onClick={handleScreenshot} style={{ marginBottom: "20px" }}>
+        截图
+      </button>
+
+      {screenshot && (
+        <div>
+          <h2>截图结果：</h2>
+          <img src={screenshot} alt="截图" style={{ maxWidth: "100%" }} />
+          <br />
+
+          <a href={screenshot} download="screenshot.png">
+            下载截图
+          </a>
+        </div>
+      )}
+
+      <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
     </>
   );
 }
