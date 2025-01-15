@@ -1,13 +1,13 @@
 import "video.js/dist/video-js.css";
 import { useEffect, useRef } from "react";
 import videojs from "video.js";
+import SubtitlesOctopus from "libass-wasm";
 function VideoPlay() {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
-
+  const subtitlesRef = useRef(null);
   useEffect(() => {
-    const videoElement = document.getElementById("video");
-    console.log("videoElement:", videoElement); // 检查元素是否在 DOM 中
+    const videoElement = videoRef.current;
     if (videoRef.current) {
       playerRef.current = videojs(videoRef.current, {
         autoplay: false,
@@ -15,11 +15,21 @@ function VideoPlay() {
         preload: "auto",
         responsive: true,
         fluid: true,
+        width: 640,
+        height: 360,
       });
 
-      playerRef.current.on("ready", () => {
-        console.log("Video.js Player Ready!");
-      });
+      var options = {
+        video: videoElement,
+        subUrl: "http://localhost:3001/subtitles.ass",
+        workerUrl: "/subtitles-octopus-worker.js",
+        font: "/font.ttf",
+        legacyWorkerUrl: "/subtitles-octopus-worker-legacy.js",
+        wasmUrl: "/subtitles-octopus-worker.wasm",
+        fallbackFont: "/font.ttf",
+      };
+
+      subtitlesRef.current = new SubtitlesOctopus(options);
     }
 
     return () => {};
@@ -33,8 +43,6 @@ function VideoPlay() {
         ref={videoRef}
         className="video-js vjs-default-skin"
         controls
-        width="640"
-        height="360"
         data-setup="{}"
       >
         <source

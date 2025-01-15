@@ -13,6 +13,8 @@
     "@tanstack/react-query": "^5.51.21",
     "@tanstack/react-query-devtools": "^5.51.23",
     "framer-motion": "^11.3.21",
+    "libass-wasm": "^4.1.0",
+    "libjass": "^0.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.52.1",
@@ -20,7 +22,7 @@
     "react-icons": "^5.2.1",
     "react-router-dom": "^6.25.1",
     "sass": "^1.77.8",
-    "video.js": "^8.21.0"
+    "video.js": "^7.20.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
