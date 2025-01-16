@@ -14,7 +14,6 @@ function VideoPlay() {
   const handleScreenshot = (e) => {
     const video = videoRef.current;
     const canvas = canvasRef.current;
-    console.log(e.target.title);
 
     if (
       video &&
@@ -30,9 +29,40 @@ function VideoPlay() {
 
       const dataURL = canvas.toDataURL("image/png");
       setScreenshot(dataURL);
+
+      showScreenshotMessage();
     }
   };
+  function showScreenshotMessage() {
+    const playerEl = playerRef.current.player().el();
 
+    let messageEl = playerEl.querySelector(".vjs-screenshot-message");
+    let screenshotMessageTimeout = null;
+    if (!messageEl) {
+      messageEl = document.createElement("div");
+      messageEl.className = "vjs-screenshot-message";
+      messageEl.textContent = "截图成功";
+      playerEl.appendChild(messageEl);
+
+      Object.assign(messageEl.style, {
+        position: "absolute",
+        top: "10px",
+        left: "10px",
+        color: "#fff",
+        background: "rgba(0, 0, 0, 0.7)",
+        padding: "5px 10px",
+        borderRadius: "5px",
+        zIndex: "999",
+      });
+    }
+
+    messageEl.style.display = "block";
+    clearTimeout(screenshotMessageTimeout);
+    screenshotMessageTimeout = setTimeout(() => {
+      messageEl.style.display = "none";
+    }, 2000);
+    console.log("成功");
+  }
   useEffect(() => {
     const videoElement = videoRef.current;
 
