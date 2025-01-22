@@ -56,7 +56,7 @@ function Header({ children }) {
             className="icon mr"
             onClick={() => setOpacity(true)}
           />
-          <SlArrowLeft onClick={() => navigate(-1)} className="icon mr" />
+          <SlArrowLeft onClick={() => navigate(-1)} />
           <Modal>
             <Modal.Open opens="config">
               <BiCog className="icon mr" />

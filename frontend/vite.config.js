@@ -9,4 +9,7 @@ export default defineConfig({
       ".wasm": "application/wasm", // 指定 .wasm MIME 类型
     },
   },
+  define: {
+    "process.env": {},
+  },
 });

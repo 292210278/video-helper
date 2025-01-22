@@ -4,7 +4,7 @@
 
 ## 用法
 
-分别在 backend 和 frontend 的文件夹中打开终端输入代码 node nodejs 和 npm run dev 即可运行程序，打开页面后请在左上角的设置按钮设置播放器地址，硬链接地址和截图地址即可使用该程序。
+分别在 backend 和 frontend 的文件夹中打开终端输入代码 node nodejs 和 npm run dev 然后分别输入 npm install 即可运行程序，打开页面后请在左上角的设置按钮设置播放器地址，硬链接地址和截图地址即可使用该程序。
 
 ## 提示
 
