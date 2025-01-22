@@ -1,20 +1,11 @@
 import { motion } from "framer-motion";
-import { useContext } from "react";
-import ConfigContext from "../../contexts/ConfigContext";
+import { useNavigate } from "react-router-dom";
 
 function VideoDetailEpisode({ item, index }) {
-  const { playerPath } = useContext(ConfigContext);
-  let timer = null;
-  async function play(path) {
-    if (!timer) {
-      timer = setTimeout(() => {
-        fetch(
-          `http://localhost:3000/play?path=${path}&playerPath=${playerPath}`
-        );
-        clearTimeout(timer);
-        timer = null;
-      }, 5000);
-    }
+  const navigate = useNavigate();
+
+  function play(item) {
+    navigate(`/video-play?videoSrc=${item}`);
   }
   return (
     <motion.li
