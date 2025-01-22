@@ -10,12 +10,9 @@ import { useEffect, useState } from "react";
 // import SearchContext from "../../contexts/SearchContext";
 
 function VideoDetailItem({ movieDetail, episodePath, type }) {
-  // const { videos } = useContext(SearchContext);
-  // const episode = episodePath ? episodePath.data : [];
   const [episode, setEpisode] = useState([]);
   const { mutate } = useUploadSub();
   const [searchParams] = useSearchParams();
-  // const [nameNoNet, setNameNoNet] = useState("");
 
   const dirName = searchParams.get("dirName");
 
@@ -36,10 +33,22 @@ function VideoDetailItem({ movieDetail, episodePath, type }) {
   useEffect(
     function () {
       if (episodePath) {
-        setEpisode(episodePath.data);
+        // fetch("http://localhost:30/video/slice", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify({
+        //     name: name,
+        //     videoPath: episodePath.data[0],
+        //   }),
+        // }).then(() => {
+
+        // });
+        setEpisode([`http://localhost:3000/public/${name}/slice/output.m3u8`]);
       }
     },
-    [episodePath]
+    [episodePath, name]
   );
   const nameByUser = name ? name : title;
 
@@ -98,6 +107,9 @@ function VideoDetailItem({ movieDetail, episodePath, type }) {
                             key={index}
                             item={episode}
                             index={index + 1}
+                            name={nameByUser}
+                            id={id}
+                            type={type}
                           />
                         ))
                       : null}
@@ -125,6 +137,7 @@ function VideoDetailItem({ movieDetail, episodePath, type }) {
                         handleAddMovie={mutate}
                         path={dirName}
                         id={id}
+                        name={nameByUser}
                       />
                     </Modal.Window>
                   </Modal>

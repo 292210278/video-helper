@@ -23,7 +23,7 @@ export async function getVideo(id, path) {
   return data;
 }
 
-export async function uploadSub(path, id, subPath, episode) {
+export async function uploadSub(path, id, subPath, episode, name) {
   try {
     await fetch("http://localhost:3000/sub", {
       method: "POST",
@@ -33,6 +33,7 @@ export async function uploadSub(path, id, subPath, episode) {
         id: id,
         subPath: subPath,
         episodeStart: episode,
+        name: name,
       }),
     });
   } catch (err) {

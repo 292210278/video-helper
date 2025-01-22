@@ -15,8 +15,8 @@ export function useCreateVideo(path, name, id, type, dirName) {
 
 export function useUploadSub() {
   const mutationUploadSub = useMutation({
-    mutationFn: ({ path, id, subPath, episode }) => {
-      uploadSub(path, id, subPath, episode);
+    mutationFn: ({ path, id, subPath, episode, name }) => {
+      uploadSub(path, id, subPath, episode, name);
     },
   });
 

@@ -169,12 +169,14 @@ async function readDirSub(path) {
   });
 }
 
-async function hardlinkSub(path, id, subPath) {
+async function hardlinkSub(path, id, subPath, episodeStart, name) {
   const filesName = await readDirSub(`E:\\电影\\hardlink\\${path}`);
 
   const fileName = filesName.filter((file) => file.includes(id));
 
-  const linkPath = `E:\\电影\\hardlink\\${path}` + "\\" + fileName[0] + "\\";
+  // const linkPath = `E:\\电影\\hardlink\\${path}` + "\\" + fileName[0] + "\\";
+  const linkPath = `./public/${name}/sub/`;
+  fs.mkdirSync(linkPath, { recursive: true });
 
   const subsPath = await readDir(subPath, "sub");
 

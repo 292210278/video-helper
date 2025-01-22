@@ -3,11 +3,16 @@ import { useEffect, useRef, useState } from "react";
 import videojs from "video.js";
 import SubtitlesOctopus from "libass-wasm";
 import "../styles/screen_shot.css";
+import { useSearchParams } from "react-router-dom";
 function VideoPlay() {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
   const subtitlesRef = useRef(null);
-
+  const [searchParams] = useSearchParams();
+  const videoSrc = searchParams.get("videoSrc");
+  const name = searchParams.get("name");
+  const id = searchParams.get("id");
+  const type = searchParams.get("type");
   const canvasRef = useRef(null);
   const [screenshot, setScreenshot] = useState(null);
 
@@ -110,7 +115,7 @@ function VideoPlay() {
 
       var options = {
         video: videoElement,
-        subUrl: "http://localhost:3001/subtitles.ass",
+        subUrl: `http://localhost:3000/public/${name}/sub/${name}-${id}-${type}_1.ass`,
         workerUrl: "/subtitles-octopus-worker.js",
         font: "/font.ttf",
         legacyWorkerUrl: "/subtitles-octopus-worker-legacy.js",
@@ -145,10 +150,7 @@ function VideoPlay() {
         controls
         data-setup="{}"
       >
-        <source
-          src="http://localhost:3001/output.m3u8"
-          type="application/x-mpegURL"
-        />
+        <source src={videoSrc} type="application/x-mpegURL" />
         您的浏览器不支持 HLS 视频播放。
       </video>
 

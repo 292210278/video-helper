@@ -8,7 +8,7 @@ const titles = [];
 
 const { execSync, exec } = require("child_process");
 const { init, hardlinkSub, uploadEpisode } = require("./hardlink");
-
+const { videoSlice } = require("./videoSlice");
 const {
   linkImagesToPublic,
   getImagesFromFolder,
@@ -220,9 +220,9 @@ app.get("/play", (req, res) => {
 });
 
 app.post("/sub", async (req, res) => {
-  const { path, id, subPath, episodeStart } = req.body;
+  const { path, id, subPath, episodeStart, name } = req.body;
 
-  await hardlinkSub(path, id, subPath, episodeStart);
+  await hardlinkSub(path, id, subPath, episodeStart, name);
   return res.status(200).json({ success: "成功" });
 });
 
@@ -258,8 +258,31 @@ app.post("/uploadFolder", upload.single("folder"), async (req, res) => {
   }
 });
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
+//视频切片
+app.post("/video/slice", async (req, res) => {
+  const { name, videoPath } = req.body;
+
+  if (!name || !videoPath) {
+    return res
+      .status(400)
+      .json({ error: "Missing required parameters: name or videoPath" });
+  }
+
+  try {
+    const isFin = await videoSlice(name, videoPath);
+    if (isFin) {
+      return res.status(200).json({
+        success: true,
+        message: "Video slicing completed successfully",
+      });
+    } else {
+      return res
+        .status(500)
+        .json({ success: false, message: "Video slicing failed" });
+    }
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
 });
 
 // 一个示例 API 端点，返回一些数据
