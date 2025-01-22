@@ -3,3 +3,4 @@ node_modules
 *.png
 *.m3u8
 *.ts
+*.ass

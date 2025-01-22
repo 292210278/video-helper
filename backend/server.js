@@ -220,9 +220,9 @@ app.get("/play", (req, res) => {
 });
 
 app.post("/sub", async (req, res) => {
-  const { path, id, subPath, episodeStart } = req.body;
+  const { path, id, subPath, episodeStart, name } = req.body;
 
-  await hardlinkSub(path, id, subPath, episodeStart);
+  await hardlinkSub(path, id, subPath, episodeStart, name);
   return res.status(200).json({ success: "成功" });
 });
 

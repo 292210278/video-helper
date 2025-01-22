@@ -10,6 +10,9 @@ function VideoPlay() {
   const subtitlesRef = useRef(null);
   const [searchParams] = useSearchParams();
   const videoSrc = searchParams.get("videoSrc");
+  const name = searchParams.get("name");
+  const id = searchParams.get("id");
+  const type = searchParams.get("type");
   const canvasRef = useRef(null);
   const [screenshot, setScreenshot] = useState(null);
 
@@ -112,7 +115,7 @@ function VideoPlay() {
 
       var options = {
         video: videoElement,
-        subUrl: "http://localhost:3001/subtitles.ass",
+        subUrl: `http://localhost:3000/public/${name}/sub/${name}-${id}-${type}_1.ass`,
         workerUrl: "/subtitles-octopus-worker.js",
         font: "/font.ttf",
         legacyWorkerUrl: "/subtitles-octopus-worker-legacy.js",

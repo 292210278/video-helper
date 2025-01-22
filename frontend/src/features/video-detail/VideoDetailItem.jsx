@@ -107,6 +107,9 @@ function VideoDetailItem({ movieDetail, episodePath, type }) {
                             key={index}
                             item={episode}
                             index={index + 1}
+                            name={nameByUser}
+                            id={id}
+                            type={type}
                           />
                         ))
                       : null}
@@ -134,6 +137,7 @@ function VideoDetailItem({ movieDetail, episodePath, type }) {
                         handleAddMovie={mutate}
                         path={dirName}
                         id={id}
+                        name={nameByUser}
                       />
                     </Modal.Window>
                   </Modal>

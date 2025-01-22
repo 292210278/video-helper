@@ -61,7 +61,7 @@ function UploadForm({
   function handleConfirm() {
     const subPath = dirName.join("/");
     // const subPathToEncode = encodeURIComponent(subPaths);
-    handleAddMovie({ path, id, subPath, episode });
+    handleAddMovie({ path, id, subPath, episode, name });
 
     onCloseModal();
   }

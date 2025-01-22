@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
-function VideoDetailEpisode({ item, index }) {
+function VideoDetailEpisode({ name, item, index, id, type }) {
   const navigate = useNavigate();
 
   function play(item) {
-    navigate(`/video-play?videoSrc=${item}`);
+    navigate(`/video-play?videoSrc=${item}&name=${name}&id=${id}&type=${type}`);
   }
   return (
     <motion.li
