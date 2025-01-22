@@ -49,12 +49,14 @@ function linkImagesToPublic(imageFiles, fileDirNames, type = "video") {
 
   //创建文件夹
   if (type === "video") {
+    if (!fs.existsSync(path.join(__dirname, `public/${fileDirNames[0]}/photo`)))
+      fs.mkdirSync(path.join(__dirname, `public/${fileDirNames[0]}/photo`));
     imageFiles.forEach((filePath, index) => {
       const fileName = path.basename(filePath);
       let fileDirName = fileDirNames;
       const destPath = path.join(
         __dirname,
-        `public/${fileDirName[0]}`,
+        `public/${fileDirName[0]}/photo`,
         fileName
       );
 
@@ -64,7 +66,7 @@ function linkImagesToPublic(imageFiles, fileDirNames, type = "video") {
         if (imagesFilterByName(fileName, fileDirName)) {
           fs.linkSync(filePath, destPath);
           imagesPath.push({
-            imagePath: `http://localhost:3000/public/${fileDirName[0]}/${fileName}`,
+            imagePath: `http://localhost:3000/public/${fileDirName[0]}/photo/${fileName}`,
             id: index,
           });
         }
@@ -119,7 +121,7 @@ function imagesFilterByName(filename, fileDirName) {
 
 function getImagesInPublic(name) {
   const fileNames = fs.readdirSync(
-    `${__dirname}/public/${name}`,
+    `${__dirname}/public/${name}/photo`,
     function (err) {
       if (err) {
         console.log(err);
@@ -130,8 +132,9 @@ function getImagesInPublic(name) {
 
   fileNames.forEach((fileName, index) => {
     if (fileName === "poster") return;
+
     imagesPath.push({
-      imagePath: `http://localhost:3000/public/${name}/${fileName}`,
+      imagePath: `http://localhost:3000/public/${name}/photo/${fileName}`,
       id: index,
     });
   });
