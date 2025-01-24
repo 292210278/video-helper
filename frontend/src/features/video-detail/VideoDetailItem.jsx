@@ -110,6 +110,7 @@ function VideoDetailItem({ movieDetail, episodePath, type }) {
                             name={nameByUser}
                             id={id}
                             type={type}
+                            dirName={dirName}
                           />
                         ))
                       : null}

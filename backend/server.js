@@ -4,6 +4,7 @@ const app = express();
 const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
+const multer = require("multer");
 const titles = [];
 
 const { execSync, exec } = require("child_process");
@@ -37,8 +38,9 @@ const port = 3000;
 
 app.use(cors());
 
-app.use(express.json()); //需要解析json才行
-
+app.use(express.json());
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use("/public", express.static(path.join(__dirname, "public")));
 
 function getDriveList() {
@@ -293,6 +295,20 @@ app.get("/api/data", (req, res) => {
   };
   res.json(data);
 });
+
+app.post("/photo/upload", (req, res) => {
+  const { timeString, videoPath1 } = req.body;
+  const ffmpegArg = `ffmpeg -i ${videoPath1} -ss ${timeString} -vframes 1 output_image.jpg`;
+
+  exec(ffmpegArg, (err) => {
+    if (err) {
+      console.error("执行失败:", err);
+      return;
+    }
+  });
+});
+
+// 启动服务器
 
 const server = app.listen(port, () => {
   console.log(`http://localhost:${3000}`);

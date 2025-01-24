@@ -1,18 +1,21 @@
 import "video.js/dist/video-js.css";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import videojs from "video.js";
 import SubtitlesOctopus from "libass-wasm";
 import "../styles/screen_shot.css";
 import { useSearchParams } from "react-router-dom";
+import ConfigContext from "../contexts/ConfigContext";
 function VideoPlay() {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
+  const { videoPath } = useContext(ConfigContext);
   const subtitlesRef = useRef(null);
   const [searchParams] = useSearchParams();
   const videoSrc = searchParams.get("videoSrc");
   const name = searchParams.get("name");
   const id = searchParams.get("id");
   const type = searchParams.get("type");
+  const dirName = searchParams.get("dirName");
   const canvasRef = useRef(null);
   const [screenshot, setScreenshot] = useState(null);
 
@@ -33,6 +36,67 @@ function VideoPlay() {
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
       const dataURL = canvas.toDataURL("image/png");
+
+      // 准备上传的文件数据
+      const uploadImage = async () => {
+        // 移除 dataURL 中的前缀部分（即 "data:image/png;base64,"）
+        const base64Data = dataURL.replace(/^data:image\/\w+;base64,/, "");
+
+        const formData = new FormData();
+        // 将 Base64 图像数据放到 FormData 中
+        formData.append("image", base64Data);
+        formData.append("name", "screenshot.png"); // 自定义文件名
+
+        // try {
+        //   const response = await fetch("http://localhost:3000/photo/upload", {
+        //     method: "POST",
+        //     body:formData // 将 FormData 发送到后端
+        //   });
+
+        //   if (!response.ok) {
+        //     throw new Error("上传失败");
+        //   }
+
+        //   const data = await response.json();
+        //   console.log("上传成功:", data);
+        // } catch (error) {
+        //   console.error("上传出错:", error);
+        // }
+      };
+
+      //就算当前播放时间
+      const player = playerRef.current;
+      const currentTime = player.currentTime();
+      // 将秒数转换为分钟和秒
+      let minutes = Math.floor(currentTime / 60);
+      let seconds = Math.floor(currentTime % 60);
+      let hours = Math.floor(minutes / 60);
+      // 格式化时间为 "时:分:秒" 形式
+      let timeString =
+        (hours < 10 ? "0" + hours : hours) +
+        ":" +
+        (minutes < 10 ? "0" + minutes : minutes) +
+        ":" +
+        (seconds < 10 ? "0" + seconds : seconds);
+
+      let videoPath1 =
+        videoPath +
+        "/" +
+        dirName +
+        "/" +
+        `${name}-${id}-${type}` +
+        "/" +
+        `${name}-${id}-${type}_1.mkv`;
+
+      fetch("http://localhost:3000/photo/upload", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ timeString, videoPath1 }),
+      });
+      // 调用上传函数
+      // uploadImage();
       setScreenshot(dataURL);
 
       showScreenshotMessage();
